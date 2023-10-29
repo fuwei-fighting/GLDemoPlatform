@@ -19,6 +19,8 @@
   glfwMakeContextCurrent(window);                                              \
   glfwSetFramebufferSizeCallback(window, callback);
 
+#define UNSIGNED_INT unsigned int
+
 /* GET SET */
 #define DEFINE_PROPERTY_GET_SET(Class, property, Property)                     \
   Class get##Property() const;                                                 \

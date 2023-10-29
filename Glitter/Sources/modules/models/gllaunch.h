@@ -12,13 +12,22 @@
 class GLApplication {
 public:
   GLApplication(GLFWwindow *window);
-  ~GLApplication() = default;
+  virtual ~GLApplication() = default;
 
-  GLFWwindow *glWindow() const { return m_glWindow; }
-  void setGlWindow(GLFWwindow *window) { m_glWindow = window; }
+  /// 模板方法：这个方法如果不需要重写，那就可以是个non-virtual function
+  void launch();
 
-private:
+protected:
+  virtual void processInput();
+
+  virtual void initShaders() = 0;
+  virtual void initVertexDatas() = 0;
+  virtual void executeRenders();
+
+protected:
   GLFWwindow *m_glWindow = nullptr;
+  UNSIGNED_INT m_shaderProgram;
+  UNSIGNED_INT m_vaoArray;
 };
 
 #endif // GLITTER_GLLAUNCH_H

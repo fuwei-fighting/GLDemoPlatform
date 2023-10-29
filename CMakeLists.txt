@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(Glitter)
+project(GLDemoPlatform)
 
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
@@ -29,7 +29,8 @@ else()
     endif()
 endif()
 
-include_directories(Glitter/Headers/
+include_directories(Glitter
+                    Glitter/Headers/
                     Glitter/Vendor/assimp/include/
                     Glitter/Vendor/bullet/src/
                     Glitter/Vendor/glad/include/
@@ -41,11 +42,16 @@ file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
 file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp Glitter/Sources/*.hpp
                             Glitter/Sources/modules/**/*.h
-                            Glitter/Sources/modules/**/*.cpp)
+                            Glitter/Sources/modules/**/*.cpp
+                            Glitter/Sources/modules/models/**/*.h
+                            Glitter/Sources/modules/models/**/*.cpp)
 file(GLOB PROJECT_SHADERS Glitter/Shaders/*.comp
                           Glitter/Shaders/*.frag
                           Glitter/Shaders/*.geom
-                          Glitter/Shaders/*.vert)
+                          Glitter/Shaders/*.vert
+                          Glitter/Shaders/*.cpp
+                          Glitter/Shaders/*.h
+                          Glitter/Shaders/*.glsl)
 file(GLOB PROJECT_CONFIGS CMakeLists.txt
                           Readme.md
                          .gitattributes
