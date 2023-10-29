@@ -1,6 +1,6 @@
 include(ClangFormat)
 
-set(BEAUTIFICATION_TARGETS Glitter)
+set(BEAUTIFICATION_TARGETS GLDemoPlatform)
 
 
 # Defines new target for 'clangformat' to beautify whole project.
