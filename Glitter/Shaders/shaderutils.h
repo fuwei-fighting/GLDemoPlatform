@@ -13,5 +13,8 @@ public:
     static std::string getShaderAbsPath(const char* fileName);
 };
 
+#define GL_GET_SHADER_SOURCE(shaderName, glslName)  \
+    std::string shaderName##Str = ShaderUtils::readShaderSource(ShaderUtils::getShaderAbsPath(glslName)); \
+    const char* shaderName##Source = shaderName##Str.c_str();                                             \
 
 #endif //GLDEMOPLATFORM_SHADERUTILS_H

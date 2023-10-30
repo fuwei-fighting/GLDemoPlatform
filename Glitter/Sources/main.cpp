@@ -1,9 +1,9 @@
 // Local Headers
 #include "Shaders/shaderutils.h"
-#include "glitter.hpp"
 #include "modules/common/commondefine.h"
 #include "modules/models/gllaunch.h"
-#include "modules/models/triangle/gltriangle.h"
+
+#include "modules/models/modelhead.h"
 
 // System Headers
 #include <GLFW/glfw3.h>
@@ -12,6 +12,9 @@
 // Standard Headers
 #include <cstdio>
 #include <cstdlib>
+
+static constexpr int kWindowWidth = 800;
+static constexpr int kWindowHeight = 600;
 
 // glfw: whenever the window size changed (by OS or user resize) this callback
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
@@ -24,7 +27,8 @@ int main(int argc, char *argv[]) {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-  auto mWindow = glfwCreateWindow(mWidth, mHeight, "OpenGL", nullptr, nullptr);
+  auto mWindow =
+      glfwCreateWindow(kWindowWidth, kWindowHeight, "OpenGL", nullptr, nullptr);
 
   GLWINDOW_INIT(mWindow, framebuffer_size_callback)
 
@@ -36,7 +40,7 @@ int main(int argc, char *argv[]) {
           PROJECT_SOURCE_DIR);
 
   /*Application start*/
-  GLApplication *app = new GlTriangle(mWindow);
+  GLApplication *app = new GlTrangleExtent(mWindow);
   app->launch();
   /*Application end*/
 

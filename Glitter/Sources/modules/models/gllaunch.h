@@ -23,11 +23,13 @@ protected:
   virtual void initShaders() = 0;
   virtual void initVertexDatas() = 0;
   virtual void executeRenders();
+  virtual void clearDatas() = 0;
+
+  virtual void checkShaderValid(UNSIGNED_INT shader);
+  virtual void checkProgramValid(UNSIGNED_INT program);
 
 protected:
   GLFWwindow *m_glWindow = nullptr;
-  UNSIGNED_INT m_shaderProgram;
-  UNSIGNED_INT m_vaoArray;
 };
 
 #endif // GLITTER_GLLAUNCH_H
