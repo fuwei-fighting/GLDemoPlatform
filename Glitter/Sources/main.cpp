@@ -1,5 +1,6 @@
 // Local Headers
 #include "Shaders/shaderutils.h"
+#include "glitter.hpp"
 #include "modules/common/commondefine.h"
 #include "modules/models/gllaunch.h"
 
@@ -12,9 +13,6 @@
 // Standard Headers
 #include <cstdio>
 #include <cstdlib>
-
-static constexpr int kWindowWidth = 800;
-static constexpr int kWindowHeight = 600;
 
 // glfw: whenever the window size changed (by OS or user resize) this callback
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
@@ -40,7 +38,7 @@ int main(int argc, char *argv[]) {
           PROJECT_SOURCE_DIR);
 
   /*Application start*/
-  GLApplication *app = new GlTrangleExtent(mWindow);
+  GLApplication *app = new GlShaderUniform(mWindow);
   app->launch();
   /*Application end*/
 

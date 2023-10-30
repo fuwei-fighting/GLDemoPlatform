@@ -40,12 +40,10 @@ include_directories(Glitter
 
 file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
-file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp Glitter/Sources/*.hpp
+file(GLOB_RECURSE PROJECT_SOURCES Glitter/Sources/*.cpp Glitter/Sources/*.hpp
                             Glitter/Sources/modules/**/*.h
-                            Glitter/Sources/modules/**/*.cpp
-                            Glitter/Sources/modules/models/**/*.h
-                            Glitter/Sources/modules/models/**/*.cpp)
-file(GLOB PROJECT_SHADERS Glitter/Shaders/*.comp
+                            Glitter/Sources/modules/**/*.cpp)
+file(GLOB_RECURSE PROJECT_SHADERS Glitter/Shaders/*.comp
                           Glitter/Shaders/*.frag
                           Glitter/Shaders/*.geom
                           Glitter/Shaders/*.vert
@@ -82,5 +80,3 @@ add_custom_command(
 include(CodeTools)
 project_codetools_setup()
 # 集成ClangFormat
-
-#add_subdirectory(Glitter/Sources/modules)

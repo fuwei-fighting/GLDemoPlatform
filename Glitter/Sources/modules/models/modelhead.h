@@ -5,6 +5,8 @@
 #ifndef GLDEMOPLATFORM_MODELHEAD_H
 #define GLDEMOPLATFORM_MODELHEAD_H
 
+#include "Sources/modules/models/shader/glshaderinterpolation.h"
+#include "Sources/modules/models/shader/glshaderuniform.h"
 #include "Sources/modules/models/triangle/gltrangleextent.h"
 #include "Sources/modules/models/triangle/gltriangle.h"
 
