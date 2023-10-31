@@ -14,24 +14,25 @@ public:
   explicit GlTextures(GLFWwindow *window);
   ~GlTextures() = default;
 
-private:
-  void initShaders() override;
-  void initVertexDatas() override;
-  void executeRenders() override;
+protected:
+  virtual void initShaders() override;
+  virtual void initVertexDatas() override;
+  virtual void executeRenders() override;
   void clearDatas() override;
 
 protected:
-  void loadTexture(const char *filePath);
+  virtual void loadTexture(const char *filePath, UNSIGNED_INT &texture,
+                           UNSIGNED_INT colorStyle = GL_RGB);
 
-private:
+protected:
   // shader
   UNSIGNED_INT m_shaderProgram;
   // vertex
   UNSIGNED_INT m_vaoArray;
   UNSIGNED_INT m_vboArray;
   UNSIGNED_INT m_eboArray;
-  // texture
-  UNSIGNED_INT m_texture;
+  // textures
+  std::vector<UNSIGNED_INT> m_textures;
 };
 
 #endif // GLDEMOPLATFORM_GLTEXTURES_H

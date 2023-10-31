@@ -12,6 +12,7 @@
 #include <iostream>
 
 const char *kTextureContainerPath = "/resources/textures/container.jpg";
+const char *kTextureAwesomeFacePath = "/resources/textures/awesomeface.png";
 
 GlTextures::GlTextures(GLFWwindow *window) : GLApplication(window) {}
 
@@ -79,14 +80,25 @@ void GlTextures::initVertexDatas() {
                         (void *)(6 * sizeof(float)));
   glEnableVertexAttribArray(2);
 
-  // load and create texture
-  loadTexture(kTextureContainerPath);
+  // 创建纹理
+  m_textures.resize(2);
+  loadTexture(kTextureContainerPath, m_textures[0]);
+  loadTexture(kTextureAwesomeFacePath, m_textures[1], GL_RGBA);
+  // 融合纹理
+  glUseProgram(m_shaderProgram);
+  glUniform1i(glGetUniformLocation(m_shaderProgram, "inTexture"), 0);
+  glUniform1i(glGetUniformLocation(m_shaderProgram, "outTexture"), 1);
 }
 
 void GlTextures::executeRenders() {
   GLApplication::executeRenders();
 
-  glBindTexture(GL_TEXTURE_2D, m_texture);
+  // texture
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, m_textures[0]);
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, m_textures[1]);
+
   glUseProgram(m_shaderProgram);
   glBindVertexArray(m_vaoArray);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -98,28 +110,30 @@ void GlTextures::clearDatas() {
   glDeleteBuffers(1, &m_eboArray);
 }
 
-void GlTextures::loadTexture(const char *filePath) {
+void GlTextures::loadTexture(const char *filePath, UNSIGNED_INT &texture,
+                             UNSIGNED_INT colorStyle) {
   std::string absPath = FileUtil::getModulesAbsNamePath(filePath);
-  glGenTextures(1, &m_texture);
-  glBindTexture(GL_TEXTURE_2D, m_texture);
-  // set the texture wrapping parameters
+  glGenTextures(1, &texture);
+  glBindTexture(GL_TEXTURE_2D, texture);
+  // 坐标轴纹理变化
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  // set texture filtering parameters
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-                  GL_LINEAR_MIPMAP_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  // 放大缩小纹理变化
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
   // load image, create texture and generate mipmaps
   int width, height, nrChannels;
+  stbi_set_flip_vertically_on_load(true);
   unsigned char *data =
       stbi_load(absPath.c_str(), &width, &height, &nrChannels, 0);
   if (data) {
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+    glTexImage2D(GL_TEXTURE_2D, 0, colorStyle, width, height, 0, colorStyle,
                  GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    glGenerateMipmap(
+        GL_TEXTURE_2D); // 为当前绑定的纹理自动生成所有需要的多级渐远纹理
   } else {
-    std::cout << "Failed to load texture." << std::endl;
+    fprintf(stderr, "Failed to load texture, filePath = %s.", filePath);
   }
   stbi_image_free(data);
 }
