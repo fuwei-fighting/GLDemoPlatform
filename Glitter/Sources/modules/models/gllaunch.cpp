@@ -12,6 +12,9 @@ void GLApplication::launch() {
   initShaders();
   initVertexDatas();
 
+  // loading textures (if exists)
+  loadTextures();
+
   // render loop
   while (!glfwWindowShouldClose(m_glWindow)) {
     processInput();

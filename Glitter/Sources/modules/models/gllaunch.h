@@ -22,6 +22,7 @@ protected:
 
   virtual void initShaders() = 0;
   virtual void initVertexDatas() = 0;
+  virtual void loadTextures() = 0;
   virtual void executeRenders();
   virtual void clearDatas() = 0;
 

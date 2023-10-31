@@ -19,6 +19,7 @@ protected:
   virtual void initVertexDatas() override;
   virtual void executeRenders() override;
   void clearDatas() override;
+  void loadTextures() override;
 
 protected:
   virtual void loadTexture(const char *filePath, UNSIGNED_INT &texture,

@@ -1,18 +1,15 @@
 //
 // Created by fuwei on 2023/10/30.
 //
-
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 #include "Shaders/shaderutils.h"
 #include "Sources/modules/common/fileutil.h"
 #include "gltextures.h"
 
-#include <iostream>
-
-const char *kTextureContainerPath = "/resources/textures/container.jpg";
-const char *kTextureAwesomeFacePath = "/resources/textures/awesomeface.png";
+constexpr char *kTextureContainerPath1 = "/resources/textures/container.jpg";
+constexpr char *kTextureAwesomeFacePath1 =
+    "/resources/textures/awesomeface.png";
 
 GlTextures::GlTextures(GLFWwindow *window) : GLApplication(window) {}
 
@@ -79,15 +76,6 @@ void GlTextures::initVertexDatas() {
   glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
                         (void *)(6 * sizeof(float)));
   glEnableVertexAttribArray(2);
-
-  // 创建纹理
-  m_textures.resize(2);
-  loadTexture(kTextureContainerPath, m_textures[0]);
-  loadTexture(kTextureAwesomeFacePath, m_textures[1], GL_RGBA);
-  // 融合纹理
-  glUseProgram(m_shaderProgram);
-  glUniform1i(glGetUniformLocation(m_shaderProgram, "inTexture"), 0);
-  glUniform1i(glGetUniformLocation(m_shaderProgram, "outTexture"), 1);
 }
 
 void GlTextures::executeRenders() {
@@ -119,8 +107,8 @@ void GlTextures::loadTexture(const char *filePath, UNSIGNED_INT &texture,
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   // 放大缩小纹理变化
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   // load image, create texture and generate mipmaps
   int width, height, nrChannels;
@@ -136,4 +124,15 @@ void GlTextures::loadTexture(const char *filePath, UNSIGNED_INT &texture,
     fprintf(stderr, "Failed to load texture, filePath = %s.", filePath);
   }
   stbi_image_free(data);
+}
+
+void GlTextures::loadTextures() {
+  // 创建纹理
+  m_textures.resize(2);
+  loadTexture(kTextureContainerPath1, m_textures[0]);
+  loadTexture(kTextureAwesomeFacePath1, m_textures[1], GL_RGBA);
+  // 融合纹理
+  glUseProgram(m_shaderProgram);
+  glUniform1i(glGetUniformLocation(m_shaderProgram, "inTexture"), 0);
+  glUniform1i(glGetUniformLocation(m_shaderProgram, "outTexture"), 1);
 }

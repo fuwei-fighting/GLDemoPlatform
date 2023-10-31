@@ -1,3 +1,4 @@
+#define STB_IMAGE_IMPLEMENTATION
 // Local Headers
 #include "Shaders/shaderutils.h"
 #include "glitter.hpp"
@@ -38,7 +39,7 @@ int main(int argc, char *argv[]) {
           PROJECT_SOURCE_DIR);
 
   /*Application start*/
-  GLApplication *app = new GlTexturesExtent(mWindow);
+  GLApplication *app = new GlTransforms(mWindow);
   app->launch();
   /*Application end*/
 

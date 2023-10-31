@@ -20,6 +20,7 @@
   glfwSetFramebufferSizeCallback(window, callback);
 
 #define UNSIGNED_INT unsigned int
+#define UNSIGNED_CHAR unsigned char
 
 /* GET SET */
 #define DEFINE_PROPERTY_GET_SET(Class, property, Property)                     \
