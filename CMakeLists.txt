@@ -42,7 +42,9 @@ file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
 file(GLOB_RECURSE PROJECT_SOURCES Glitter/Sources/*.cpp Glitter/Sources/*.hpp
                             Glitter/Sources/modules/**/*.h
-                            Glitter/Sources/modules/**/*.cpp)
+                            Glitter/Sources/modules/**/*.cpp
+                            Glitter/Sources/modules/**/*.jpg
+                            Glitter/Sources/modules/**/*.png)
 file(GLOB_RECURSE PROJECT_SHADERS Glitter/Shaders/*.comp
                           Glitter/Shaders/*.frag
                           Glitter/Shaders/*.geom

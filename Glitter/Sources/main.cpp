@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
           PROJECT_SOURCE_DIR);
 
   /*Application start*/
-  GLApplication *app = new GlShaderUniform(mWindow);
+  GLApplication *app = new GlTextures(mWindow);
   app->launch();
   /*Application end*/
 
