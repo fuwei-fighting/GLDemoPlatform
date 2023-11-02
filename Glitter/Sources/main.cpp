@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
           PROJECT_SOURCE_DIR);
 
   /*Application start*/
-  GLApplication *app = new GlTransforms(mWindow);
+  GLApplication *app = new GlCameras(mWindow);
   app->launch();
   /*Application end*/
 

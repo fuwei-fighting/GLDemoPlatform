@@ -48,8 +48,9 @@ void GlTexturesExtent::processInput() {
 }
 
 void GlTexturesExtent::loadTexture(const char *filePath, unsigned int &texture,
-                                   unsigned int colorStyle) {
-  GlTextures::loadTexture(filePath, texture, colorStyle);
+                                   unsigned int internalFormat,
+                                   unsigned int format) {
+  GlTextures::loadTexture(filePath, texture, internalFormat, format);
 
   glUseProgram(m_shaderProgram);
   glUniform1i(glGetUniformLocation(m_shaderProgram, "inTexture"), 0);

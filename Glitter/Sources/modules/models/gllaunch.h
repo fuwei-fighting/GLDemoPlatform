@@ -24,6 +24,7 @@ protected:
   virtual void initVertexDatas() = 0;
   virtual void loadTextures() = 0;
   virtual void executeRenders();
+  virtual void renderBeforeLoop(){};
   virtual void clearDatas() = 0;
 
   virtual void checkShaderValid(UNSIGNED_INT shader);

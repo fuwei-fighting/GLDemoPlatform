@@ -5,6 +5,10 @@
 #ifndef GLDEMOPLATFORM_MODELHEAD_H
 #define GLDEMOPLATFORM_MODELHEAD_H
 
+#include "Sources/modules/models/camera/glcameras.h"
+#include "Sources/modules/models/coordinate/glcoordinate.h"
+#include "Sources/modules/models/coordinate/glcoordinatedepth.h"
+#include "Sources/modules/models/coordinate/glcoordinatemulti.h"
 #include "Sources/modules/models/shader/glshaderinterpolation.h"
 #include "Sources/modules/models/shader/glshaderuniform.h"
 #include "Sources/modules/models/texture/gltextures.h"

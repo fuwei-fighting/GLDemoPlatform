@@ -14,8 +14,12 @@ public:
 
 private:
   void processInput() override;
+
+protected:
   void loadTexture(const char *filePath, unsigned int &texture,
-                   unsigned int colorStyle) override;
+                   unsigned int internalFormat, unsigned int format) override;
+
+private:
   void executeRenders() override;
 
 protected:

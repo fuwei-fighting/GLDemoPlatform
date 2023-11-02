@@ -20,10 +20,12 @@ protected:
   virtual void executeRenders() override;
   void clearDatas() override;
   void loadTextures() override;
+  //  virtual void renderBeforeLoop() override;
 
 protected:
   virtual void loadTexture(const char *filePath, UNSIGNED_INT &texture,
-                           UNSIGNED_INT colorStyle = GL_RGB);
+                           UNSIGNED_INT internalFormat = GL_RGB,
+                           UNSIGNED_INT format = GL_RGB);
 
 protected:
   // shader

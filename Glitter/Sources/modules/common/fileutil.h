@@ -12,10 +12,11 @@ class FileUtil {
 public:
   static std::string getModulesAbsNamePath(const std::string &filePath) {
     std::string absPath = std::string(PROJECT_SOURCE_DIR) +
-                          "/Glitter/Sources/modules/" + filePath;
+                          "/Glitter/Sources/modules" + std::move(filePath);
+    fprintf(stdout, "getModulesAbsNamePath absPath = %s\n", absPath.c_str());
     std::ifstream fileStream(absPath);
     if (!fileStream.good()) {
-      fprintf(stderr, "[FileUtil] getModulesAbsNamePath: %s not exists.",
+      fprintf(stderr, "[FileUtil] getModulesAbsNamePath: %s not exists.\n",
               absPath.c_str());
       return "";
     }

@@ -15,6 +15,9 @@ void GLApplication::launch() {
   // loading textures (if exists)
   loadTextures();
 
+  // some render before loop
+  renderBeforeLoop();
+
   // render loop
   while (!glfwWindowShouldClose(m_glWindow)) {
     processInput();

@@ -99,7 +99,7 @@ void GlTextures::clearDatas() {
 }
 
 void GlTextures::loadTexture(const char *filePath, UNSIGNED_INT &texture,
-                             UNSIGNED_INT colorStyle) {
+                             UNSIGNED_INT internalFormat, UNSIGNED_INT format) {
   std::string absPath = FileUtil::getModulesAbsNamePath(filePath);
   glGenTextures(1, &texture);
   glBindTexture(GL_TEXTURE_2D, texture);
@@ -116,7 +116,7 @@ void GlTextures::loadTexture(const char *filePath, UNSIGNED_INT &texture,
   unsigned char *data =
       stbi_load(absPath.c_str(), &width, &height, &nrChannels, 0);
   if (data) {
-    glTexImage2D(GL_TEXTURE_2D, 0, colorStyle, width, height, 0, colorStyle,
+    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format,
                  GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(
         GL_TEXTURE_2D); // 为当前绑定的纹理自动生成所有需要的多级渐远纹理
